@@ -20,7 +20,9 @@ jobs:
           node-version: '18'
 
       - name: Install dependencies
-        run: npm install -g @octokit/core axios
+        run: |
+          npm install @octokit/core axios cheerio puppeteer
+          ls -la node_modules # Verify installation
 
       - name: Check PR Ticket Status
         env:
