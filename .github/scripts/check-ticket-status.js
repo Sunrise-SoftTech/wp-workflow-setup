@@ -30,7 +30,7 @@
 
                 // Get some data from the page (for example, the ticket status)
                 const ticketStatus = await page.evaluate(() => {
-                    return document.querySelector('span.trac-status').textContent.trim(); // Modify the selector to match the ticket status element
+                    return document.querySelector('span.trac-statuss').textContent.trim(); // Modify the selector to match the ticket status element
                 });
 
                 console.log(ticketStatus);
