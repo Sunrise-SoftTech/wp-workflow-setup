@@ -1,0 +1,28 @@
+name: Check WordPress Ticket Status
+
+on:
+  pull_request:
+    types: [opened, edited]
+  # schedule:
+    # - cron: "0 12 * * *" # Daily run at 12:00 UTC
+
+jobs:
+  check-ticket:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout Repository
+        uses: actions/checkout@v2
+
+      - name: Set up Node.js
+        uses: actions/setup-node@v3
+        with:
+          node-version: '18'
+
+      - name: Install dependencies
+        run: npm install -g @octokit/core axios
+
+      - name: Check PR Ticket Status
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: node .github/scripts/check-ticket-status.js
