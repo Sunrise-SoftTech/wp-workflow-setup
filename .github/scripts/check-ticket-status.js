@@ -46,7 +46,7 @@
                 }
             }
         }
-        await browser.close(); // Ensure the browser is closed
+        // await browser.close(); // Ensure the browser is closed
     } catch (error) {
         console.error(error);
         process.exit(1);
