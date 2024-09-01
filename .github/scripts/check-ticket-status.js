@@ -33,6 +33,8 @@
                     return document.querySelector('span.trac-status').textContent.trim(); // Modify the selector to match the ticket status element
                 });
 
+                console.log(ticketStatus);
+
                 // const $ = cheerio.load(response.data);
                 // const statusText = $('span.trac-status').text();
 
