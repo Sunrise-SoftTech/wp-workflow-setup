@@ -23,8 +23,6 @@
 
             if (ticketUrl && ticketUrl[0]) {
                 const ticketId = ticketUrl[1];
-                // const response = await axios.get(`https://core.trac.wordpress.org/ticket/${ticketId}`);
-
                 const url = `https://core.trac.wordpress.org/ticket/${ticketId}`;
                 await page.goto(url, { waitUntil: 'domcontentloaded' });
 
@@ -45,16 +43,13 @@
                         issue_number: pr.number,
                         body: "Mojj"
                     });
-                    // await octokit.request('POST /repos/Sunrise-SoftTech/wp-workflow-setup/pulls/{issue_number}/comments', {
-                    //     owner: 'Sunrise-SoftTech',
-                    //     repo: 'wp-workflow-setup',
-                    //     issue_number: pr.number,
-                    //     body: 'The ticket associated with this PR is closed. Do you still want to keep this PR open?'
-                    // });
                 }
             }
         }
+        await browser.close(); // Ensure the browser is closed
     } catch (error) {
         console.error(error);
+        process.exit(1);
     }
+    process.exit(0);
 })();
