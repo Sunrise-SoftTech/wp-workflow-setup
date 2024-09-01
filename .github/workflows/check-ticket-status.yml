@@ -3,8 +3,8 @@ name: Check WordPress Ticket Status
 on:
   pull_request:
     types: [opened, edited]
-  schedule:
-    - cron: "*/2 * * * *"
+  # schedule:
+  #   - cron: "*/2 * * * *"
 
 jobs:
   check-ticket:

@@ -45,7 +45,7 @@
                     });
                 }
             }
-        } 
+        }
         await browser.close(); // Ensure the browser is closed
     } catch (error) {
         console.error(error);
