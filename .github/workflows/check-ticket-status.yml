@@ -21,7 +21,7 @@ jobs:
 
       - name: Install dependencies
         run: |
-          npm install @octokit/core axios cheerio puppeteer
+          npm install @octokit/rest axios cheerio puppeteer
           ls -la node_modules # Verify installation
 
       - name: Check PR Ticket Status
