@@ -20,7 +20,7 @@ jobs:
           node-version: '18'
 
       - name: Install dependencies
-        run: npm install @octokit/core axios
+        run: npm install -g @octokit/core axios
 
       - name: Check PR Ticket Status
         env:
