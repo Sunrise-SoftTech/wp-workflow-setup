@@ -57,7 +57,7 @@
                             owner: 'Sunrise-SoftTech',
                             repo: 'wp-workflow-setup',
                             issue_number: pr.number,
-                            body: "Mojj"
+                            body: "The ticket refrenced in this PR has been closed. Please verify if the changes are still required."
                         });
                     }
                 }
