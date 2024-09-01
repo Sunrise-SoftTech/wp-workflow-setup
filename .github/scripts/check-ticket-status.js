@@ -39,7 +39,7 @@
                 // const statusText = $('span.trac-status').text();
 
                 if (ticketStatus && ticketStatus.toLowerCase().includes('closed')) {
-                    await octokit.request('POST /Sunrise-SoftTech/wp-workflow-setup/pull/{issue_number}/comments', {
+                    await octokit.request('POST /repos/Sunrise-SoftTech/wp-workflow-setup/pulls/{issue_number}/comments', {
                         owner: 'Sunrise-SoftTech',
                         repo: 'wp-workflow-setup',
                         issue_number: pr.number,
