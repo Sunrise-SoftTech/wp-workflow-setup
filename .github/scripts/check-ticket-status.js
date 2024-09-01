@@ -1,11 +1,10 @@
-const axios = require('axios');
-const { Octokit } = require("@octokit/core");
-
-const octokit = new Octokit({
-    auth: process.env.GITHUB_TOKEN
-});
-
 (async () => {
+    const { Octokit } = await import("@octokit/core");
+    const axios = await import('axios');
+
+    const octokit = new Octokit({
+        auth: process.env.GITHUB_TOKEN
+    });
     try {
         const { data: pullRequests } = await octokit.request('GET /repos/{owner}/{repo}/pulls', {
             owner: 'Sunrise-SoftTech',
