@@ -2,7 +2,7 @@
     const { Octokit } = await import("@octokit/rest");
     const axios = require('axios');
     const puppeteer = require('puppeteer');
-    const cheerio = await import('cheerio');
+    const cheerio = await import('cheerio'); // Importing with ESM syntax
 
     const octokit = new Octokit({
         auth: process.env.GITHUB_TOKEN
