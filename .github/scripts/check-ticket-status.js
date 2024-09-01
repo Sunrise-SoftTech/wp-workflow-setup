@@ -41,12 +41,25 @@
                 // const statusText = $('span.trac-status').text();
 
                 if (ticketStatus && ticketStatus.toLowerCase().includes('closed')) {
-                    const commentResponse = await octokit.rest.issues.createComment({
+                    // Fetch existing comments on the PR
+                    const { data: comments } = await octokit.rest.issues.listComments({
                         owner: 'Sunrise-SoftTech',
                         repo: 'wp-workflow-setup',
-                        issue_number: pr.number,
-                        body: "Mojj"
+                        issue_number: pr.number
                     });
+
+                    // Check if the comment already exists
+                    const existingComment = comments.find(comment => comment.body.includes("Mojj"));
+
+                    if (!existingComment) {
+                        // Add comment if not already present
+                        await octokit.rest.issues.createComment({
+                            owner: 'Sunrise-SoftTech',
+                            repo: 'wp-workflow-setup',
+                            issue_number: pr.number,
+                            body: "Mojj"
+                        });
+                    }
                 }
             }
         }
