@@ -20,7 +20,7 @@
             }
         });
 
-        for (const pr of pullRequests) {
+        for (let pr of pullRequests) {
             const prBody = pr.body;
             const ticketUrl = prBody.match(/https:\/\/core.trac.wordpress.org\/ticket\/(\d+)/);
 
