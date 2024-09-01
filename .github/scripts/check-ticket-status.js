@@ -1,6 +1,7 @@
 (async () => {
     const { Octokit } = await import("@octokit/core");
     const axios = await import('axios');
+    const cheerio = await import('cheerio');
 
     const octokit = new Octokit({
         auth: process.env.GITHUB_TOKEN
@@ -18,14 +19,15 @@
 
             if (ticketUrl && ticketUrl[0]) {
                 const ticketId = ticketUrl[1];
-                const response = await axios.get(`https://core.trac.wordpress.org/rest/ticket/${ticketId}`);
+                const response = await axios.get(`https://core.trac.wordpress.org/ticket/${ticketId}`);
 
-                const ticketStatus = response.data.status;
+                const $ = cheerio.load(response.data);
+                const statusText = $('span.trac-status').text();
 
-                if (ticketStatus === 'closed') {
-                    await octokit.request('POST /repos/{owner}/{repo}/issues/{issue_number}/comments', {
-                        owner: 'Sunrise-SoftTech',
-                        repo: 'wp-workflow-setup',
+                if (statusText && statusText.toLowerCase().includes('closed')) {
+                    await octokit.request('POST /repos/WordPress/wordpress-develop/issues/{issue_number}/comments', {
+                        owner: 'WordPress',
+                        repo: 'wordpress-develop',
                         issue_number: pr.number,
                         body: 'The ticket associated with this PR is closed. Do you still want to keep this PR open?'
                     });
