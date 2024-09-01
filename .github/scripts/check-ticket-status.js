@@ -21,6 +21,7 @@
         });
 
         for (let pr of pullRequests) {
+            console.log(pr.number);
             const prBody = pr.body;
             const ticketUrl = prBody.match(/https:\/\/core.trac.wordpress.org\/ticket\/(\d+)/);
 
