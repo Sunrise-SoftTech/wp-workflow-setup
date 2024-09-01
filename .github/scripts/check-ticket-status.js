@@ -1,5 +1,5 @@
 (async () => {
-    const { Octokit } = await import("@octokit/core");
+    const { Octokit } = await import("@octokit/rest");
     const axios = require('axios');
     const puppeteer = require('puppeteer');
     const cheerio = await import('cheerio');
