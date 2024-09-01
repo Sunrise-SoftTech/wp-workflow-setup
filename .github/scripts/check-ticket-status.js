@@ -39,12 +39,18 @@
                 // const statusText = $('span.trac-status').text();
 
                 if (ticketStatus && ticketStatus.toLowerCase().includes('closed')) {
-                    await octokit.request('POST /repos/Sunrise-SoftTech/wp-workflow-setup/pulls/{issue_number}/comments', {
+                    const commentResponse = await octokit.issues.createComment({
                         owner: 'Sunrise-SoftTech',
                         repo: 'wp-workflow-setup',
                         issue_number: pr.number,
-                        body: 'The ticket associated with this PR is closed. Do you still want to keep this PR open?'
+                        body: "Mojj"
                     });
+                    // await octokit.request('POST /repos/Sunrise-SoftTech/wp-workflow-setup/pulls/{issue_number}/comments', {
+                    //     owner: 'Sunrise-SoftTech',
+                    //     repo: 'wp-workflow-setup',
+                    //     issue_number: pr.number,
+                    //     body: 'The ticket associated with this PR is closed. Do you still want to keep this PR open?'
+                    // });
                 }
             }
         }
