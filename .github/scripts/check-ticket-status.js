@@ -14,7 +14,10 @@
         const { data: pullRequests } = await octokit.request('GET /repos/{owner}/{repo}/pulls', {
             owner: 'Sunrise-SoftTech',
             repo: 'wp-workflow-setup',
-            state: 'open'
+            state: 'open',
+            headers: {
+                'Cache-Control': 'no-cache'
+            }
         });
 
         for (const pr of pullRequests) {
