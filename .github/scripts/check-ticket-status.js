@@ -1,11 +1,15 @@
 (async () => {
     const { Octokit } = await import("@octokit/core");
     const axios = require('axios');
+    const puppeteer = require('puppeteer');
     const cheerio = await import('cheerio');
 
     const octokit = new Octokit({
         auth: process.env.GITHUB_TOKEN
     });
+
+    const browser = await puppeteer.launch();
+    const page = await browser.newPage();
     try {
         const { data: pullRequests } = await octokit.request('GET /repos/{owner}/{repo}/pulls', {
             owner: 'Sunrise-SoftTech',
@@ -19,12 +23,20 @@
 
             if (ticketUrl && ticketUrl[0]) {
                 const ticketId = ticketUrl[1];
-                const response = await axios.get(`https://core.trac.wordpress.org/ticket/${ticketId}`);
+                // const response = await axios.get(`https://core.trac.wordpress.org/ticket/${ticketId}`);
 
-                const $ = cheerio.load(response.data);
-                const statusText = $('span.trac-status').text();
+                const url = `https://core.trac.wordpress.org/ticket/${ticketId}`;
+                await page.goto(url, { waitUntil: 'domcontentloaded' });
 
-                if (statusText && statusText.toLowerCase().includes('closed')) {
+                // Get some data from the page (for example, the ticket status)
+                const ticketStatus = await page.evaluate(() => {
+                    return document.querySelector('span.trac-status').textContent.trim(); // Modify the selector to match the ticket status element
+                });
+
+                // const $ = cheerio.load(response.data);
+                // const statusText = $('span.trac-status').text();
+
+                if (ticketStatus && ticketStatus.toLowerCase().includes('closed')) {
                     await octokit.request('POST /repos/Sunrise-SoftTech/wp-workflow-setup/issues/{issue_number}/comments', {
                         owner: 'Sunrise-SoftTech',
                         repo: 'wp-workflow-setup',
