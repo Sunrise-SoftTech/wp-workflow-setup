@@ -25,9 +25,9 @@
                 const statusText = $('span.trac-status').text();
 
                 if (statusText && statusText.toLowerCase().includes('closed')) {
-                    await octokit.request('POST /repos/WordPress/wordpress-develop/issues/{issue_number}/comments', {
-                        owner: 'WordPress',
-                        repo: 'wordpress-develop',
+                    await octokit.request('POST /repos/Sunrise-SoftTech/wp-workflow-setup/issues/{issue_number}/comments', {
+                        owner: 'Sunrise-SoftTech',
+                        repo: 'wp-workflow-setup',
                         issue_number: pr.number,
                         body: 'The ticket associated with this PR is closed. Do you still want to keep this PR open?'
                     });
